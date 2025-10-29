@@ -12,18 +12,19 @@ namespace PacMan2312
     {
         private Tyle[,] _map;
         private string[] _textFile;
+        private GameObject[] _gameObject;
 
-        public Scene(string path) 
+        public Scene(string path, GameObject[] gameObjects) 
         {
             _textFile = GetTextFile(path);
             _map = GetMap(_textFile);
+            _gameObject = gameObjects;
         }
 
-        public void Update(IGameObject[] gameObjects)
+        public void Update()
         {
-            for (int x = 0; x < _map.GetLength(0); x++)
-                for(int y = 0; y < _map.GetLength(1); y++)
-                    _map[x,y].AddGameObject(gameObjects);
+            foreach (GameObject gameObject in _gameObject)
+                gameObject.Update(this);
         }
 
         public void PrintMap()
